@@ -1,0 +1,75 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+
+    <color name="black_5">#0D000000</color>
+    <color name="black_10">#1A000000</color>
+    <color name="black_20">#33000000</color>
+    <color name="black_30">#4D000000</color>
+    <color name="black_40">#66000000</color>
+    <color name="black_50">#80000000</color>
+    <color name="black_60">#99000000</color>
+    <color name="black_70">#B3000000</color>
+    <color name="black_80">#CC000000</color>
+    <color name="black_90">#E6000000</color>
+
+    <color name="white">#FFFFFF</color>
+    <color name="white_5">#0DFFFFFF</color>
+    <color name="white_10">#1AFFFFFF</color>
+    <color name="white_20">#33FFFFFF</color>
+    <color name="white_30">#4DFFFFFF</color>
+    <color name="white_40">#66FFFFFF</color>
+    <color name="white_50">#80FFFFFF</color>
+    <color name="white_60">#99FFFFFF</color>
+    <color name="white_70">#B3FFFFFF</color>
+    <color name="white_80">#CCFFFFFF</color>
+    <color name="white_90">#E6FFFFFF</color>
+
+    <color name="gray">#808080</color>
+    <color name="gray_5">#0D808080</color>
+    <color name="gray_8">#10808080</color>
+    <color name="gray_10">#1A808080</color>
+    <color name="gray_20">#33808080</color>
+    <color name="gray_30">#4D808080</color>
+    <color name="gray_40">#66808080</color>
+    <color name="gray_50">#80808080</color>
+    <color name="gray_60">#99808080</color>
+    <color name="gray_70">#B3808080</color>
+    <color name="gray_80">#CC808080</color>
+    <color name="gray_90">#E6808080</color>
+
+    <color name="blue">#0080ff</color>
+    <color name="blue_5">#0D0080ff</color>
+    <color name="blue_10">#1A0080ff</color>
+    <color name="blue_20">#330080ff</color>
+    <color name="blue_30">#4D0080ff</color>
+    <color name="blue_40">#660080ff</color>
+    <color name="blue_50">#800080ff</color>
+    <color name="blue_60">#990080ff</color>
+    <color name="blue_70">#B30080ff</color>
+    <color name="blue_80">#CC0080ff</color>
+    <color name="blue_90">#E60080ff</color>
+
+    <color name="red">#ff0000</color>
+    <color name="red_5">#0Dff0000</color>
+    <color name="red_10">#1Aff0000</color>
+    <color name="red_20">#33ff0000</color>
+    <color name="red_30">#4Dff0000</color>
+    <color name="red_40">#66ff0000</color>
+    <color name="red_50">#80ff0000</color>
+    <color name="red_60">#99ff0000</color>
+    <color name="red_70">#B3ff0000</color>
+    <color name="red_80">#CCff0000</color>
+    <color name="red_90">#E6ff0000</color>
+
+    <color name="pressed_background">#bcc7c7</color>
+
+    <color name="ptr_down_load_dot">#999999</color>
+    <color name="ptr_down_load_text_color">#66000000</color>
+
+    <color name="down_load_dot_color">#999999</color>
+    <color name="down_load_dot_color_dark">#636368</color>
+    <color name="down_load_text_color">#66000000</color>
+    <color name="down_load_text_color_dark">#4CFFFFFF</color>
+    <color name="list_hovered_background">#0a000000</color>
+
+</resources>

@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    android:padding="30dp"
+    tools:context=".demo.MainActivity">
+
+    <com.cys.common.widget.button.TextButton
+        android:id="@+id/dialog_button"
+        android:layout_width="match_parent"
+        android:layout_height="48dp"
+        android:layout_marginStart="3dp"
+        android:fontFamily="sans-serif-medium"
+        android:gravity="center"
+        android:textStyle="bold"
+        android:text="对话框"
+        android:textColor="@color/blue_90" />
+
+</LinearLayout>

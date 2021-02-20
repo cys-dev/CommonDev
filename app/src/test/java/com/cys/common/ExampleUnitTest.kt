@@ -1,4 +1,4 @@
-package com.cys.commondev
+package com.cys.common
 
 import org.junit.Test
 

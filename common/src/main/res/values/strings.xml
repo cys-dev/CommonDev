@@ -1,0 +1,17 @@
+<resources>
+    <string name="app_name">YoungWeibo</string>
+
+    <string name="ptr_go_Refreshing">松开刷新</string>
+    <string name="ptr_is_Refreshing">加载中</string>
+    <string name="ptr_label">PullRefreshLayout</string>
+    <string name="ptr_last_refresh">上次刷新</string>
+    <string name="ptr_last_refresh_hour">小时前</string>
+    <string name="ptr_last_refresh_just_now">刚刚</string>
+    <string name="ptr_last_refresh_minute">分钟前</string>
+    <string name="ptr_last_refresh_second">秒前</string>
+    <string name="ptr_pull_refresh">下拉刷新</string>
+
+    <string name="confirm">确定</string>
+    <string name="cancel">取消</string>
+
+</resources>

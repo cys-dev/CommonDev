@@ -1,0 +1,32 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+
+    <declare-styleable name="PtrPullRefreshLayout">
+        <attr name="ptrRingColor" format="color" />
+        <attr name="ptrRingBgColor" format="color" />
+        <attr name="ptrTextColor" format="color" />
+        <attr name="ptrPinContent" format="boolean" />
+        <attr name="ptrAnimOffset" format="dimension" />
+    </declare-styleable>
+
+    <declare-styleable name="AnimDownLoadView">
+        <attr name="mcDownLoadText" format="string" />
+    </declare-styleable>
+
+    <declare-styleable name="LoadingTextView">
+        <attr name="mcLoadingText" format="string" />
+        <attr name="mcErrorText" format="string" />
+        <attr name="mcDotRadius" format="integer" />
+        <attr name="mcLoadingTextColor" format="integer" />
+        <attr name="mcDotColor" format="integer" />
+        <attr name="mcDotNum" format="integer" />
+        <attr name="Widget.LoadingTextStyle" format="reference" />
+    </declare-styleable>
+
+    <declare-styleable name="TextButton">
+        <attr name="radius" format="dimension"/>
+        <attr name="normalColor" format="color"/>
+        <attr name="pressedColor" format="color"/>
+    </declare-styleable>
+
+</resources>
