@@ -4,6 +4,7 @@ import android.annotation.SuppressLint
 import android.content.Context
 import android.content.res.ColorStateList
 import android.graphics.Color
+import android.graphics.Typeface
 import android.util.Log
 import android.view.Gravity
 import android.view.LayoutInflater
@@ -28,7 +29,7 @@ class ChooseDialog(context: Context) : MessageDialog(context) {
     var chooseBackgroundColor = Color.TRANSPARENT
     var choiceMode = ListView.CHOICE_MODE_SINGLE
 
-    val chooseBinding = DialogChooseBinding.inflate(layoutInflater)
+    private val chooseBinding = DialogChooseBinding.inflate(layoutInflater)
 
     override fun initContentView() {
         initListView()
@@ -71,6 +72,7 @@ class ChooseDialog(context: Context) : MessageDialog(context) {
             if (convertView == null) {
                 val checkedTextView = CheckedTextView(context)
                 checkedTextView.setCheckMarkDrawable(R.drawable.ic_check_mark)
+                checkedTextView.typeface = Typeface.SANS_SERIF
                 checkedTextView.checkMarkTintList = ColorStateList(
                     arrayOf(intArrayOf(android.R.attr.state_checked), intArrayOf()),
                     intArrayOf(chooseMarkColor, Color.TRANSPARENT)
@@ -87,8 +89,8 @@ class ChooseDialog(context: Context) : MessageDialog(context) {
                 checkedTextView.gravity = Gravity.CENTER_VERTICAL
                 checkedTextView.setTextColor(chooseTextColor)
 
-                val padding = 5.dp2Px()
-                val paddingTop = 8.dp2Px()
+                val padding = 8.dp2Px()
+                val paddingTop = 10.dp2Px()
                 checkedTextView.setPadding(padding, paddingTop, padding, paddingTop)
 
                 view = checkedTextView

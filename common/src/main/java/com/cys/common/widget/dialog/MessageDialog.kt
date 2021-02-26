@@ -43,7 +43,7 @@ open class MessageDialog(context: Context) : AlertDialog(context) {
 
     var listener: DialogListener? = null
 
-    open val binding: DialogMessageBinding =
+    protected val binding: DialogMessageBinding =
         DialogMessageBinding.inflate(LayoutInflater.from(context))
 
     override fun show() {
@@ -88,6 +88,7 @@ open class MessageDialog(context: Context) : AlertDialog(context) {
             dialogTitle.text = title
             dialogMessage.text = message
             dialogMessage.gravity = messageGravity
+            dialogMessage.visibility = if (message.isEmpty()) View.GONE else View.VISIBLE
         }
     }
 

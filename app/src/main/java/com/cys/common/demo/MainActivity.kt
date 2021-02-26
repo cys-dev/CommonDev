@@ -1,5 +1,6 @@
 package com.cys.common.demo
 
+import android.content.Intent
 import android.os.Bundle
 import android.view.Gravity
 import androidx.appcompat.app.AppCompatActivity
@@ -23,18 +24,7 @@ class MainActivity : AppCompatActivity() {
 
     private fun initView() {
         binding.dialogButton.setOnClickListener {
-            ChooseDialog(this).apply {
-                title = "警告"
-                message = "这是一条信息"
-                messageGravity = Gravity.START
-                chooseItems = arrayListOf("123", "456", "789")
-                chooseIndex = 1
-                listener = DialogListener().register {
-                    onConfirm = {
-
-                    }
-                }
-            }.show()
+            startActivity(Intent(this, DialogActivity::class.java))
         }
     }
 }

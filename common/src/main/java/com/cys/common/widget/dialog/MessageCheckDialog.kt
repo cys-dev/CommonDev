@@ -18,7 +18,7 @@ class MessageCheckDialog(context: Context) : MessageDialog(context) {
     var checkboxFillColor = ContextCompat.getColor(context, R.color.blue_90)
     var bindCheckboxToConfirm = false
 
-    val checkBinding = DialogCheckBinding.inflate(layoutInflater)
+    private val checkBinding = DialogCheckBinding.inflate(layoutInflater)
 
     override fun initContentView() {
         initCheckbox()
