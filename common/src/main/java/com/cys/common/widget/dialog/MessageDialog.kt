@@ -16,7 +16,6 @@ import com.cys.common.utils.ShapeUtils
 
 @SuppressLint("InflateParams")
 open class MessageDialog(context: Context) : AlertDialog(context) {
-
     var title = ""
     var message = ""
     var messageGravity = Gravity.CENTER

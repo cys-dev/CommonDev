@@ -24,17 +24,34 @@
     </declare-styleable>
 
     <declare-styleable name="TextButton">
-        <attr name="radius" format="dimension"/>
-        <attr name="normalColor" format="color"/>
-        <attr name="pressedColor" format="color"/>
+        <attr name="radius" format="dimension" />
+        <attr name="normalColor" format="color" />
+        <attr name="pressedColor" format="color" />
     </declare-styleable>
 
-    <declare-styleable name="ColorPickerView">
-        <attr name="indicatorColor" format="color" /><!--指示点颜色-->
-        <attr name="indicatorEnable" format="boolean" /><!--是否启用指示点-->
-        <attr name="orientation" format="integer">
-            <enum name="horizontal" value="0" />
-            <enum name="vertical" value="1" />
-        </attr>
+    <declare-styleable name="ColorPlaceView">
+        <attr name="fillColor" format="color" />
+        <attr name="selectorColor" format="color" />
+        <attr name="selectorWidth" format="dimension" />
     </declare-styleable>
+
+    <style name="ThemeOverlay.PrimaryPalette.Red" parent="">
+        <item name="colorPrimary">@color/red</item>
+        <item name="colorPrimaryDark">@color/red_30</item>
+    </style>
+
+    <style name="ThemeOverlay.PrimaryPalette.Green" parent="">
+        <item name="colorPrimary">@color/green</item>
+        <item name="colorPrimaryDark">@color/green_30</item>
+    </style>
+
+    <style name="ThemeOverlay.PrimaryPalette.Blue" parent="">
+        <item name="colorPrimary">@color/blue</item>
+        <item name="colorPrimaryDark">@color/blue_30</item>
+    </style>
+
+    <style name="ThemeOverlay.PrimaryPalette.Gray" parent="">
+        <item name="colorPrimary">@color/gray_60</item>
+        <item name="colorPrimaryDark">@color/gray_10</item>
+    </style>
 </resources>

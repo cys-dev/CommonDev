@@ -4,6 +4,7 @@ import android.os.Bundle
 import android.view.Gravity
 import android.view.View
 import androidx.appcompat.app.AppCompatActivity
+import com.cys.common.const.Colors
 import com.cys.common.databinding.ActivityDialogBinding
 import com.cys.common.extends.showToast
 import com.cys.common.widget.dialog.*
@@ -88,6 +89,7 @@ class DialogActivity: AppCompatActivity(), View.OnClickListener {
                 PickColorDialog(this).apply {
                     title = "选择颜色"
                     message = ""
+                    inputColor = Colors.WHITE
                     messageGravity = Gravity.START
                     listener = dialogListener
                 }.show()

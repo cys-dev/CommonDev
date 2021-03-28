@@ -49,6 +49,18 @@
     <color name="blue_80">#CC0080ff</color>
     <color name="blue_90">#E60080ff</color>
 
+    <color name="green">#2ecc71</color>
+    <color name="green_5">#0D2ecc71</color>
+    <color name="green_10">#1A2ecc71</color>
+    <color name="green_20">#332ecc71</color>
+    <color name="green_30">#4D2ecc71</color>
+    <color name="green_40">#662ecc71</color>
+    <color name="green_50">#802ecc71</color>
+    <color name="green_60">#992ecc71</color>
+    <color name="green_70">#B32ecc71</color>
+    <color name="green_80">#CC2ecc71</color>
+    <color name="green_90">#E62ecc71</color>
+
     <color name="red">#ff0000</color>
     <color name="red_5">#0Dff0000</color>
     <color name="red_10">#1Aff0000</color>
