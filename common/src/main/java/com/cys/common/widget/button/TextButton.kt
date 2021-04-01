@@ -3,8 +3,6 @@ package com.cys.common.widget.button
 import android.content.Context
 import android.content.res.ColorStateList
 import android.util.AttributeSet
-import android.util.Log
-import android.widget.TextView
 import androidx.annotation.ColorInt
 import androidx.appcompat.widget.AppCompatTextView
 import androidx.core.content.ContextCompat
@@ -29,11 +27,11 @@ class TextButton : AppCompatTextView {
         val radius = arr.getDimensionPixelOffset(R.styleable.TextButton_radius, 4)
         val normalColor = arr.getColor(
             R.styleable.TextButton_normalColor,
-            context.resources.getColor(R.color.gray_20)
+            ContextCompat.getColor(context, R.color.gray_20)
         )
         val pressedColor = arr.getColor(
             R.styleable.TextButton_pressedColor,
-            context.resources.getColor(R.color.gray_40)
+            ContextCompat.getColor(context, R.color.gray_40)
         )
         arr.recycle()
         setStyle(radius, textColors.defaultColor, normalColor, pressedColor)

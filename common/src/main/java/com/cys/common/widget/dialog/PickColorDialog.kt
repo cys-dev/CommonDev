@@ -1,6 +1,5 @@
 package com.cys.common.widget.dialog
 
-import android.annotation.SuppressLint
 import android.content.Context
 import android.graphics.Color
 import android.view.View
@@ -22,7 +21,7 @@ import kotlinx.coroutines.launch
 import kotlinx.coroutines.withContext
 import kotlin.math.roundToInt
 
-@SuppressLint("InflateParams")
+// TODO 使用Chip实现
 class PickColorDialog(context: Context) : MessageDialog(context) {
 
     private val pickerBinding = DialogPickColorBinding.inflate(layoutInflater)

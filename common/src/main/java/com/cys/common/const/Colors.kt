@@ -11,5 +11,7 @@ object Colors {
     val BLUE = Color.parseColor("#4a90e2")
     val BROWN = Color.parseColor("#8b572a")
     val GRAY = Color.parseColor("#9b9b9b")
+    val DARK_GRAY = Color.parseColor("#3a3a3a")
     val WHITE = Color.parseColor("#ffffff")
+    val BLACK = Color.parseColor("#000000")
 }

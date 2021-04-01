@@ -1,6 +1,12 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
 
+    <style name="Theme.Base" parent="Theme.MaterialComponents.Light.NoActionBar"/>
+
+    <style name="Toolbar.Base" parent="TextAppearance.Widget.AppCompat.Toolbar.Title">
+        <item name="android:textSize">18sp</item>
+    </style>
+
     <declare-styleable name="PtrPullRefreshLayout">
         <attr name="ptrRingColor" format="color" />
         <attr name="ptrRingBgColor" format="color" />

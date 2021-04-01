@@ -22,4 +22,19 @@
         app:pressedColor="@color/blue_20"
         app:radius="8dp" />
 
+    <com.cys.common.widget.button.TextButton
+        android:id="@+id/dialog_setting"
+        android:layout_width="match_parent"
+        android:layout_height="48dp"
+        android:layout_marginStart="3dp"
+        android:layout_marginTop="10dp"
+        android:fontFamily="sans-serif-medium"
+        android:gravity="center"
+        android:text="设置页"
+        android:textColor="@color/blue_90"
+        android:textStyle="bold"
+        app:normalColor="@color/blue_5"
+        app:pressedColor="@color/blue_20"
+        app:radius="8dp" />
+
 </LinearLayout>

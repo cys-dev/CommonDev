@@ -74,4 +74,15 @@ object ShapeUtils {
         return stateListDrawable
     }
 
+    fun getColorStateList(vararg values: Int): ColorStateList {
+        val size = values.size / 2
+        val states = Array(size) { IntArray(1) }
+        val colors = IntArray(size)
+
+        for (idx in 0 until size) {
+            states[idx] = IntArray(1) { values[idx * 2] }
+            colors[idx] = values[idx * 2 + 1]
+        }
+        return ColorStateList(states, colors)
+    }
 }

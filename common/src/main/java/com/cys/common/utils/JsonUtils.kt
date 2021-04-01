@@ -4,6 +4,6 @@ import com.google.gson.Gson
 
 object JsonUtils {
 
-    val gson = Gson()
+    val gson by lazy { Gson() }
 
 }

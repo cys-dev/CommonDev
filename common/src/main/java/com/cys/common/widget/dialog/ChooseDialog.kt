@@ -50,7 +50,8 @@ class ChooseDialog(context: Context) : MessageDialog(context) {
         with(chooseBinding) {
             dialogChooseListView.setOnItemClickListener { _, _, position, _ ->
                 chooseIndex = position
-                chooseItems
+                listener?.confirm()
+                dismiss()
             }
         }
     }
@@ -85,12 +86,12 @@ class ChooseDialog(context: Context) : MessageDialog(context) {
                     pressedDrawable,
                     android.R.attr.state_checked
                 )
-                checkedTextView.textSize = 16F
+                checkedTextView.textSize = 15F
                 checkedTextView.gravity = Gravity.CENTER_VERTICAL
                 checkedTextView.setTextColor(chooseTextColor)
 
                 val padding = 8.dp2Px()
-                val paddingTop = 10.dp2Px()
+                val paddingTop = 15.dp2Px()
                 checkedTextView.setPadding(padding, paddingTop, padding, paddingTop)
 
                 view = checkedTextView
@@ -105,7 +106,7 @@ class ChooseDialog(context: Context) : MessageDialog(context) {
                 holder.checkedTextView?.text = getItem(position)
                 holder.checkedTextView?.isChecked = position == chooseIndex
             }
-
+            view.setBackgroundResource(R.drawable.default_click_background)
             return view
         }
 
