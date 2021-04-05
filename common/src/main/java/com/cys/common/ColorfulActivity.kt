@@ -12,13 +12,14 @@ import com.cys.common.utils.systembar.StatusBarHelper
 
 abstract class ColorfulActivity : AppCompatActivity() {
 
-    private lateinit var binding: ActivityColorfulBinding
+    lateinit var binding: ActivityColorfulBinding
 
     data class ColorConfig(
         @ColorInt val actionBarBackGroundColor: Int = Colors.BLUE,
         @ColorInt val actionBarForeGroundColor: Int = Colors.WHITE,
         val title: String = "",
-        val lightStatusBarIcon: Boolean = false
+        val lightStatusBarIcon: Boolean = false,
+        val showBackButton: Boolean = true
     )
 
     open fun getColorConfig(): ColorConfig {
@@ -42,13 +43,17 @@ abstract class ColorfulActivity : AppCompatActivity() {
         setColorConfig(getColorConfig())
     }
 
-    fun setColorConfig(config: ColorConfig) = with(binding){
+    fun setColorConfig(config: ColorConfig) = with(binding) {
         binding.toolBar.title = config.title
         binding.toolBar.setBackgroundColor(config.actionBarBackGroundColor)
         binding.toolBar.setTitleTextColor(config.actionBarForeGroundColor)
-        val drawable = ContextCompat.getDrawable(this@ColorfulActivity, R.drawable.ic_back)
-        drawable?.setTint(config.actionBarForeGroundColor)
-        binding.toolBar.setNavigationIcon(R.drawable.ic_back)
+        supportActionBar?.setDisplayHomeAsUpEnabled(config.showBackButton)
+
+        if (config.showBackButton) {
+            val drawable = ContextCompat.getDrawable(this@ColorfulActivity, R.drawable.ic_back)
+            drawable?.setTint(config.actionBarForeGroundColor)
+            binding.toolBar.setNavigationIcon(R.drawable.ic_back)
+        }
 
         StatusBarHelper.translucent(window)
         if (config.lightStatusBarIcon) {
