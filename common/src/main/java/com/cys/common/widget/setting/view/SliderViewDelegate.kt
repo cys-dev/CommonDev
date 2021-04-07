@@ -45,7 +45,7 @@ class SliderViewDelegate(
         settingSlider.addOnChangeListener { _, value, fromUser ->
             if (fromUser) {
                 ConfigUtils.set(item.key, value)
-                callback?.onSettingChanged(item.key)
+                callback?.onSliderChanged(item.key, value)
             }
         }
     }

@@ -4,6 +4,7 @@
 
     <application>
         <activity android:name=".widget.setting.SettingActivity"
+            android:windowSoftInputMode="adjustResize"
             android:theme="@style/Theme.Base"/>
     </application>
 

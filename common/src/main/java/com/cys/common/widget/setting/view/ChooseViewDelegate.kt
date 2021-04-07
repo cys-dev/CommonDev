@@ -54,7 +54,7 @@ class ChooseViewDelegate(
                         item.summary = item.chooseItems[chooseIndex]
                         settingSummary.text = item.summary
                         ConfigUtils.set(item.key, item.summary)
-                        callback?.onSettingChanged(item.key)
+                        callback?.onChooseChanged(item.key, item.summary)
                     }
                 }
             }.show()

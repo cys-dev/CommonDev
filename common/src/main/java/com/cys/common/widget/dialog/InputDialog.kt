@@ -3,6 +3,7 @@ package com.cys.common.widget.dialog
 import android.annotation.SuppressLint
 import android.content.Context
 import android.os.Bundle
+import android.view.View
 import androidx.core.content.ContextCompat
 import androidx.fragment.app.DialogFragment.STYLE_NORMAL
 import com.cys.common.R
@@ -15,6 +16,7 @@ class InputDialog(context: Context) : MessageDialog(context) {
     private val inputBinding = DialogInputBinding.inflate(layoutInflater)
     val editText = inputBinding.dialogEditText
     var themeColor = ContextCompat.getColor(context, R.color.blue_80)
+    var inputText = ""
 
     override fun initContentView() {
         initEditText()
@@ -22,6 +24,7 @@ class InputDialog(context: Context) : MessageDialog(context) {
 
     private fun initEditText() {
         with(inputBinding) {
+            dialogEditText.setText(inputText)
             dialogEditText.setBaseColor(themeColor)
             dialogEditText.setPrimaryColor(themeColor)
             val drawable = ContextCompat.getDrawable(context, R.drawable.edit_text_cursor)
@@ -40,6 +43,13 @@ class InputDialog(context: Context) : MessageDialog(context) {
                 InputUtils.showSoftInput(inputBinding.dialogEditText)
             }, 100)
         }
+        val onClickListener = View.OnClickListener {
+            dismiss()
+            when (it) {
+                binding.dialogConfirm -> listener?.inputText(editText.text.toString())
+            }
+        }
+        binding.dialogConfirm.setOnClickListener(onClickListener)
     }
 
     override fun dismiss() {

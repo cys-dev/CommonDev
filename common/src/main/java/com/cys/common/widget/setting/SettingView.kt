@@ -39,19 +39,23 @@ class SettingView : RecyclerView, SettingCallback {
     private fun registerViewDelegate(@ColorInt themeColor: Int) {
         multiTypeAdapter.register(SettingFactory.SettingItem::class.java)
             .to(
+                GroupViewDelegate(this, themeColor),
                 SwitchViewDelegate(this, themeColor),
                 ChooseViewDelegate(this, themeColor),
                 SliderViewDelegate(this, themeColor),
                 EntranceViewDelegate(this, themeColor),
-                GroupViewDelegate(this, themeColor)
+                ColorViewDelegate(this, themeColor),
+                InputViewDelegate(this, themeColor)
             )
             .withKotlinClassLinker { _, item ->
                 when (item.type) {
+                    SETTING_GROUP_TITLE -> GroupViewDelegate::class
                     SETTING_SWITCH -> SwitchViewDelegate::class
                     SETTING_CHOOSE -> ChooseViewDelegate::class
                     SETTING_SLIDER -> SliderViewDelegate::class
                     SETTING_ENTRANCE -> EntranceViewDelegate::class
-                    SETTING_GROUP_TITLE -> GroupViewDelegate::class
+                    SETTING_COLOR -> ColorViewDelegate::class
+                    SETTING_INPUT -> InputViewDelegate::class
                     else -> throw IllegalArgumentException("type error: ${item.type}")
                 }
             }
@@ -76,8 +80,28 @@ class SettingView : RecyclerView, SettingCallback {
         }
     }
 
-    override fun onSettingChanged(key: String) {
-        callback?.onSettingChanged(key)
+    override fun onSwitchChanged(key: String, checked: Boolean) {
+        callback?.onSwitchChanged(key, checked)
+    }
+
+    override fun onChooseChanged(key: String, choose: String) {
+        callback?.onChooseChanged(key, choose)
+    }
+
+    override fun onSliderChanged(key: String, value: Float) {
+        callback?.onSliderChanged(key, value)
+    }
+
+    override fun onColorChanged(key: String, color: Int) {
+        callback?.onColorChanged(key, color)
+    }
+
+    override fun onEntranceClicked(key: String) {
+        callback?.onEntranceClicked(key)
+    }
+
+    override fun onInputText(key: String, text: String) {
+        callback?.onInputText(key, text)
     }
 
     override fun onDetachedFromWindow() {

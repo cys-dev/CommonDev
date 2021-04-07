@@ -12,7 +12,7 @@ import com.cys.common.utils.systembar.StatusBarHelper
 
 abstract class ColorfulActivity : AppCompatActivity() {
 
-    lateinit var binding: ActivityColorfulBinding
+    lateinit var colorfulBinding: ActivityColorfulBinding
 
     data class ColorConfig(
         @ColorInt val actionBarBackGroundColor: Int = Colors.BLUE,
@@ -30,29 +30,29 @@ abstract class ColorfulActivity : AppCompatActivity() {
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        binding = ActivityColorfulBinding.inflate(layoutInflater)
-        binding.contentContainer.addView(
+        colorfulBinding = ActivityColorfulBinding.inflate(layoutInflater)
+        colorfulBinding.contentContainer.addView(
             getContentView(),
             ViewGroup.LayoutParams(
                 ViewGroup.LayoutParams.MATCH_PARENT,
                 ViewGroup.LayoutParams.MATCH_PARENT
             )
         )
-        setContentView(binding.root)
-        setSupportActionBar(binding.toolBar)
+        setContentView(colorfulBinding.root)
+        setSupportActionBar(colorfulBinding.toolBar)
         setColorConfig(getColorConfig())
     }
 
-    fun setColorConfig(config: ColorConfig) = with(binding) {
-        binding.toolBar.title = config.title
-        binding.toolBar.setBackgroundColor(config.actionBarBackGroundColor)
-        binding.toolBar.setTitleTextColor(config.actionBarForeGroundColor)
+    fun setColorConfig(config: ColorConfig) = with(colorfulBinding) {
+        colorfulBinding.toolBar.title = config.title
+        colorfulBinding.toolBar.setBackgroundColor(config.actionBarBackGroundColor)
+        colorfulBinding.toolBar.setTitleTextColor(config.actionBarForeGroundColor)
         supportActionBar?.setDisplayHomeAsUpEnabled(config.showBackButton)
 
         if (config.showBackButton) {
             val drawable = ContextCompat.getDrawable(this@ColorfulActivity, R.drawable.ic_back)
             drawable?.setTint(config.actionBarForeGroundColor)
-            binding.toolBar.setNavigationIcon(R.drawable.ic_back)
+            colorfulBinding.toolBar.setNavigationIcon(R.drawable.ic_back)
         }
 
         StatusBarHelper.translucent(window)

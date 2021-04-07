@@ -43,6 +43,8 @@ class MainActivity : AppCompatActivity() {
                 addSlider("TEST_KEY_3", "音量", 0f, 100f, 50f)
                 addChoose("TEST_KEY_4", "电量百分比", arrayListOf("在电池图标外", "在电池图标内", "不显示"), "在电池图标内")
                 addEntrance("更多设置", factoryEntrance)
+                addColorPicker("TEST_KEY_5", "选择颜色", Colors.RED)
+                addTextInput("TEST_KEY_6", "输入文本", "123")
             }
             SettingActivity.start(this, factory)
         }

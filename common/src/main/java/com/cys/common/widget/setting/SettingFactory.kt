@@ -12,6 +12,8 @@ const val SETTING_SWITCH: SettingItemType = 0
 const val SETTING_CHOOSE: SettingItemType = 1
 const val SETTING_SLIDER: SettingItemType = 2
 const val SETTING_ENTRANCE: SettingItemType = 3
+const val SETTING_COLOR: SettingItemType = 4
+const val SETTING_INPUT: SettingItemType = 5
 
 class SettingFactory {
 
@@ -40,6 +42,8 @@ class SettingFactory {
         val sliderScale: Int = 0,
 
         val entrance: SettingFactory? = null,
+
+        val color: Int = Colors.WHITE,
 
         val groupDivider: Boolean = true
     )
@@ -104,6 +108,30 @@ class SettingFactory {
             SETTING_ENTRANCE, UUID.randomUUID().toString(), title,
             entrance = factory
         )
+    }
+
+    fun addColorPicker(
+        key: String,
+        title: String,
+        default: Int
+    ): SettingFactory {
+        itemProducts[itemProducts.size] = SettingItem(
+            SETTING_COLOR,
+            key, title, color = default
+        )
+        return this
+    }
+
+    fun addTextInput(
+        key: String,
+        title: String,
+        default: String
+    ): SettingFactory {
+        itemProducts[itemProducts.size] = SettingItem(
+            SETTING_INPUT,
+            key, title, summary = default
+        )
+        return this
     }
 
     companion object {
