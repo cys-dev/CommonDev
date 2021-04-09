@@ -31,7 +31,7 @@ class EntranceViewDelegate(
         settingTitle.text = item.title
         settingSummary.text = item.summary
         settingSummary.visibility = if (item.summary.isEmpty()) View.GONE else View.VISIBLE
-
+        settingIcon.visibility = if (item.showEntranceIcon) View.VISIBLE else View.GONE
         root.setOnClickListener { v ->
             callback?.onEntranceClicked(item.key)
             item.entrance?.let {

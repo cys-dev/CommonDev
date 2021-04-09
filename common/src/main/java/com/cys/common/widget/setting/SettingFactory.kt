@@ -42,6 +42,7 @@ class SettingFactory {
         val sliderScale: Int = 0,
 
         val entrance: SettingFactory? = null,
+        val showEntranceIcon: Boolean = true,
 
         val color: Int = Colors.WHITE,
 
@@ -103,10 +104,10 @@ class SettingFactory {
         return this
     }
 
-    fun addEntrance(title: String, factory: SettingFactory) {
+    fun addEntrance(title: String, factory: SettingFactory, showIcon: Boolean = true) {
         itemProducts[itemProducts.size] = SettingItem(
             SETTING_ENTRANCE, UUID.randomUUID().toString(), title,
-            entrance = factory
+            entrance = factory, showEntranceIcon = showIcon
         )
     }
 
