@@ -8,6 +8,7 @@ import android.view.ViewGroup
 import androidx.annotation.ColorInt
 import com.cys.common.databinding.SettingSliderBinding
 import com.cys.common.utils.config.ConfigUtils
+import com.cys.common.widget.other.BindingViewDelegate
 import com.cys.common.widget.setting.SettingCallback
 import com.cys.common.widget.setting.SettingFactory
 import com.drakeet.multitype.ViewDelegate
@@ -16,24 +17,21 @@ import java.math.BigDecimal
 class SliderViewDelegate(
     private val callback: SettingCallback? = null,
     @ColorInt private val themeColor: Int
-) : ViewDelegate<SettingFactory.SettingItem, View>() {
+) : BindingViewDelegate<SettingFactory.SettingItem, SettingSliderBinding>() {
 
-    private lateinit var binding: SettingSliderBinding
-
-    override fun onCreateView(context: Context): View {
-        binding = SettingSliderBinding.inflate(LayoutInflater.from(context))
-        binding.root.layoutParams = ViewGroup.LayoutParams(
-            ViewGroup.LayoutParams.MATCH_PARENT,
-            ViewGroup.LayoutParams.WRAP_CONTENT
-        )
-        return binding.root
+    override fun onCreateBinding(context: Context, parent: ViewGroup): SettingSliderBinding {
+        return SettingSliderBinding.inflate(LayoutInflater.from(context), parent, false)
     }
 
-    override fun onBindView(view: View, item: SettingFactory.SettingItem) = with(binding) {
+    override fun onBindBinding(binding: SettingSliderBinding, item: SettingFactory.SettingItem) = with(binding) {
         settingTitle.text = item.title
         settingSlider.valueFrom = item.sliderFrom
         settingSlider.valueTo = item.sliderTo
-        settingSlider.value = ConfigUtils.getFloat(item.key, item.sliderDefault)
+        if (item.key.isNotEmpty()) {
+            settingSlider.value = ConfigUtils.getFloat(item.key, item.sliderDefault)
+        } else {
+            settingSlider.value = item.sliderDefault
+        }
         settingSlider.setLabelFormatter {
             it.toBigDecimal().setScale(item.sliderScale, BigDecimal.ROUND_HALF_UP).toString()
         }
@@ -44,13 +42,15 @@ class SliderViewDelegate(
         settingSlider.clearOnChangeListeners()
         settingSlider.addOnChangeListener { _, value, fromUser ->
             if (fromUser) {
-                ConfigUtils.set(item.key, value)
-                callback?.onSliderChanged(item.key, value)
+                if (item.key.isNotEmpty()) {
+                    ConfigUtils.set(item.key, value)
+                }
+                callback?.onSliderChanged(item.id, value)
             }
         }
     }
 
     override fun getItemId(item: SettingFactory.SettingItem): Long {
-        return item.key.hashCode().toLong()
+        return item.id.toLong()
     }
 }

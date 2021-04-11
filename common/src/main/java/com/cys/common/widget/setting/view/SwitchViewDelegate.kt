@@ -10,57 +10,58 @@ import com.cys.common.R
 import com.cys.common.databinding.SettingSwitchBinding
 import com.cys.common.utils.ShapeUtils
 import com.cys.common.utils.config.ConfigUtils
+import com.cys.common.widget.other.BindingViewDelegate
 import com.cys.common.widget.setting.SettingCallback
 import com.cys.common.widget.setting.SettingFactory
-import com.drakeet.multitype.ViewDelegate
 
 class SwitchViewDelegate(
     private val callback: SettingCallback? = null,
     @ColorInt private val themeColor: Int
-) : ViewDelegate<SettingFactory.SettingItem, View>() {
+) : BindingViewDelegate<SettingFactory.SettingItem, SettingSwitchBinding>() {
 
-    private lateinit var binding: SettingSwitchBinding
-
-    override fun onCreateView(context: Context): View {
-        binding = SettingSwitchBinding.inflate(LayoutInflater.from(context))
-        binding.root.layoutParams = ViewGroup.LayoutParams(
-            ViewGroup.LayoutParams.MATCH_PARENT,
-            ViewGroup.LayoutParams.WRAP_CONTENT
-        )
-        return binding.root
+    override fun onCreateBinding(context: Context, parent: ViewGroup): SettingSwitchBinding {
+        return SettingSwitchBinding.inflate(LayoutInflater.from(context), parent, false)
     }
 
-    override fun onBindView(view: View, item: SettingFactory.SettingItem) = with(binding) {
-        settingTitle.text = item.title
-        settingSummary.text = item.summary
-        settingSummary.visibility = if (item.summary.isEmpty()) View.GONE else View.VISIBLE
+    override fun onBindBinding(binding: SettingSwitchBinding, item: SettingFactory.SettingItem) =
+        with(binding) {
+            settingTitle.text = item.title
+            settingSummary.text = item.summary
+            settingSummary.visibility = if (item.summary.isEmpty()) View.GONE else View.VISIBLE
 
-        settingSwitch.thumbTintList =
-            ShapeUtils.getColorStateList(
-                android.R.attr.state_checked,
-                themeColor,
-                0,
-                ContextCompat.getColor(view.context, R.color.gray_medium)
-            )
-        settingSwitch.trackTintList =
-            ShapeUtils.getColorStateList(
-                android.R.attr.state_checked,
-                ContextCompat.getColor(view.context, R.color.gray_medium),
-                0,
-                ContextCompat.getColor(view.context, R.color.gray_medium)
-            )
-        settingSwitch.isChecked = ConfigUtils.getBoolean(item.key, item.switchChecked)
-        settingSwitch.setOnCheckedChangeListener { _, isChecked ->
-            callback?.onSwitchChanged(item.key, isChecked)
-        }
-        root.setOnClickListener {
-            callback?.let {
-                binding.settingSwitch.isChecked = !binding.settingSwitch.isChecked
+            settingSwitch.thumbTintList =
+                ShapeUtils.getColorStateList(
+                    android.R.attr.state_checked,
+                    themeColor,
+                    0,
+                    ContextCompat.getColor(root.context, R.color.gray_medium)
+                )
+            settingSwitch.trackTintList =
+                ShapeUtils.getColorStateList(
+                    android.R.attr.state_checked,
+                    ContextCompat.getColor(root.context, R.color.gray_medium),
+                    0,
+                    ContextCompat.getColor(root.context, R.color.gray_medium)
+                )
+            if (item.key.isNotEmpty()) {
+                settingSwitch.isChecked = ConfigUtils.getBoolean(item.key, item.switchChecked)
+            } else {
+                settingSwitch.isChecked = item.switchChecked
+            }
+            settingSwitch.setOnCheckedChangeListener { _, isChecked ->
+                if (item.key.isNotEmpty()) {
+                    ConfigUtils.set(item.key, isChecked)
+                }
+                callback?.onSwitchChanged(item.id, isChecked)
+            }
+            root.setOnClickListener {
+                callback?.let {
+                    binding.settingSwitch.isChecked = !binding.settingSwitch.isChecked
+                }
             }
         }
-    }
 
     override fun getItemId(item: SettingFactory.SettingItem): Long {
-        return item.key.hashCode().toLong()
+        return item.id.toLong()
     }
 }

@@ -1,7 +1,7 @@
 package com.cys.common.utils
 
 import android.content.res.ColorStateList
-import android.graphics.Color
+import android.graphics.*
 import android.graphics.drawable.ColorDrawable
 import android.graphics.drawable.Drawable
 import android.graphics.drawable.GradientDrawable
@@ -84,5 +84,16 @@ object ShapeUtils {
             colors[idx] = values[idx * 2 + 1]
         }
         return ColorStateList(states, colors)
+    }
+
+    fun drawableToBitmap(drawable: Drawable): Bitmap {
+        val w = drawable.intrinsicWidth
+        val h = drawable.intrinsicHeight
+        val config = if (drawable.opacity != PixelFormat.OPAQUE) Bitmap.Config.ARGB_8888 else  Bitmap.Config.RGB_565
+        val bitmap = Bitmap.createBitmap(w, h, config)
+        val canvas = Canvas(bitmap)
+        drawable.bounds = Rect(0, 0, w, h)
+        drawable.draw(canvas)
+        return bitmap
     }
 }

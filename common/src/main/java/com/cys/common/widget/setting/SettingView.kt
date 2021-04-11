@@ -4,11 +4,13 @@ import android.content.Context
 import android.util.AttributeSet
 import android.view.View
 import androidx.annotation.ColorInt
+import androidx.recyclerview.widget.DiffUtil
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.cys.common.widget.setting.view.*
 import com.drakeet.multitype.MultiTypeAdapter
 import java.util.*
+import kotlin.collections.ArrayList
 import kotlin.concurrent.fixedRateTimer
 
 class SettingView : RecyclerView, SettingCallback {
@@ -21,6 +23,7 @@ class SettingView : RecyclerView, SettingCallback {
     )
 
     private val multiTypeAdapter = MultiTypeAdapter()
+    private val data = ArrayList<SettingFactory.SettingItem>()
     private var noticeTimer: Timer? = null
     private var noticeCount = 0
     var callback: SettingCallback? = null
@@ -31,9 +34,16 @@ class SettingView : RecyclerView, SettingCallback {
         multiTypeAdapter.setHasStableIds(true)
         adapter = multiTypeAdapter
         layoutManager = LinearLayoutManager(context)
-        multiTypeAdapter.items = factory.itemProducts.values.toList()
-        multiTypeAdapter.notifyDataSetChanged()
+        setData(factory.itemProducts.values.toList())
         showNoticeItem(factory.noticeIndex)
+    }
+
+    fun setData(list: List<SettingFactory.SettingItem>) {
+        val diffResult = DiffUtil.calculateDiff(SettingDiffUtil(list, data))
+        diffResult.dispatchUpdatesTo(multiTypeAdapter)
+        data.clear()
+        data.addAll(list)
+        multiTypeAdapter.items = list
     }
 
     private fun registerViewDelegate(@ColorInt themeColor: Int) {
@@ -61,6 +71,15 @@ class SettingView : RecyclerView, SettingCallback {
             }
     }
 
+    fun showNotice(id: Int) {
+        multiTypeAdapter.items.forEachIndexed { index, it ->
+            if (it is SettingFactory.SettingItem && it.id == id) {
+                showNoticeItem(index)
+                return
+            }
+        }
+    }
+
     private fun showNoticeItem(index: Int) {
         if (index == -1) {
             return
@@ -80,28 +99,28 @@ class SettingView : RecyclerView, SettingCallback {
         }
     }
 
-    override fun onSwitchChanged(key: String, checked: Boolean) {
-        callback?.onSwitchChanged(key, checked)
+    override fun onSwitchChanged(id: Int, checked: Boolean) {
+        callback?.onSwitchChanged(id, checked)
     }
 
-    override fun onChooseChanged(key: String, choose: String) {
-        callback?.onChooseChanged(key, choose)
+    override fun onChooseChanged(id: Int, choose: String) {
+        callback?.onChooseChanged(id, choose)
     }
 
-    override fun onSliderChanged(key: String, value: Float) {
-        callback?.onSliderChanged(key, value)
+    override fun onSliderChanged(id: Int, value: Float) {
+        callback?.onSliderChanged(id, value)
     }
 
-    override fun onColorChanged(key: String, color: Int) {
-        callback?.onColorChanged(key, color)
+    override fun onColorChanged(id: Int, color: Int) {
+        callback?.onColorChanged(id, color)
     }
 
-    override fun onEntranceClicked(key: String) {
-        callback?.onEntranceClicked(key)
+    override fun onEntranceClicked(id: Int) {
+        callback?.onEntranceClicked(id)
     }
 
-    override fun onInputText(key: String, text: String) {
-        callback?.onInputText(key, text)
+    override fun onInputText(id: Int, text: String) {
+        callback?.onInputText(id, text)
     }
 
     override fun onDetachedFromWindow() {

@@ -27,6 +27,7 @@ class PickColorDialog(context: Context) : MessageDialog(context) {
     private val pickerBinding = DialogPickColorBinding.inflate(layoutInflater)
     private val colorPlaceList = ArrayList<ColorPlaceView>()
     private val defaultColorList = arrayListOf(
+        Colors.WHITE,
         Colors.BLUE,
         Colors.BROWN,
         Colors.GRAY,
@@ -72,18 +73,14 @@ class PickColorDialog(context: Context) : MessageDialog(context) {
                 }
             }
 
-            GlobalScope.launch {
-                val customColorList = ConfigUtils.getIntList(ConfigConst.KEY_CUSTOM_COLOR)
-                withContext(Dispatchers.Main) {
-                    customColorList.forEach {
-                        val view = generateColorPlace(it)
-                        view.setOnClickListener(clickListener)
-                        colorPlaceList.add(view)
-                        dialogFlexbox.addView(view)
-                        if (inputColor == it) {
-                            checkOne(view)
-                        }
-                    }
+            val customColorList = ConfigUtils.getIntList(ConfigConst.KEY_CUSTOM_COLOR)
+            customColorList.forEach {
+                val view = generateColorPlace(it)
+                view.setOnClickListener(clickListener)
+                colorPlaceList.add(view)
+                dialogFlexbox.addView(view)
+                if (inputColor == it) {
+                    checkOne(view)
                 }
             }
 

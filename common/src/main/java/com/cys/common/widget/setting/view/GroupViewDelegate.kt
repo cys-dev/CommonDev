@@ -6,32 +6,29 @@ import android.view.View
 import android.view.ViewGroup
 import androidx.annotation.ColorInt
 import com.cys.common.databinding.SettingGroupTitleBinding
+import com.cys.common.widget.other.BindingViewDelegate
 import com.cys.common.widget.setting.SettingCallback
 import com.cys.common.widget.setting.SettingFactory
-import com.drakeet.multitype.ViewDelegate
 
 class GroupViewDelegate(
     private val callback: SettingCallback? = null,
     @ColorInt private val themeColor: Int
-) : ViewDelegate<SettingFactory.SettingItem, View>() {
+) : BindingViewDelegate<SettingFactory.SettingItem, SettingGroupTitleBinding>() {
 
-    private lateinit var binding: SettingGroupTitleBinding
-
-    override fun onCreateView(context: Context): View {
-        binding = SettingGroupTitleBinding.inflate(LayoutInflater.from(context))
-        binding.root.layoutParams = ViewGroup.LayoutParams(
-            ViewGroup.LayoutParams.MATCH_PARENT,
-            ViewGroup.LayoutParams.WRAP_CONTENT
-        )
-        return binding.root
+    override fun onCreateBinding(context: Context, parent: ViewGroup): SettingGroupTitleBinding {
+        return SettingGroupTitleBinding.inflate(LayoutInflater.from(context), parent, false)
     }
 
-    override fun onBindView(view: View, item: SettingFactory.SettingItem) = with(binding) {
-        settingTitle.text = item.title
-        settingGroupDivider.visibility = if (item.groupDivider) View.VISIBLE else View.GONE
-    }
+    override fun onBindBinding(
+        binding: SettingGroupTitleBinding,
+        item: SettingFactory.SettingItem
+    ) =
+        with(binding) {
+            settingTitle.text = item.title
+            settingGroupDivider.visibility = if (item.groupDivider) View.VISIBLE else View.GONE
+        }
 
     override fun getItemId(item: SettingFactory.SettingItem): Long {
-        return item.key.hashCode().toLong()
+        return item.id.toLong()
     }
 }

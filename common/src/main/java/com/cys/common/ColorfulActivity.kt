@@ -1,6 +1,7 @@
 package com.cys.common
 
 import android.os.Bundle
+import android.view.MenuItem
 import android.view.View
 import android.view.ViewGroup
 import androidx.annotation.ColorInt
@@ -61,5 +62,13 @@ abstract class ColorfulActivity : AppCompatActivity() {
         } else {
             StatusBarHelper.setStatusBarDarkMode(this@ColorfulActivity)
         }
+    }
+
+    override fun onOptionsItemSelected(item: MenuItem): Boolean {
+        if (item.itemId == R.id.homeAsUp) {
+            onBackPressed()
+            return true
+        }
+        return super.onOptionsItemSelected(item)
     }
 }

@@ -54,10 +54,15 @@ class ColorPlaceView : ConstraintLayout {
     private fun initView() {
         with(binding) {
             colorFillContainer.background =
-                ShapeUtils.getRadiusStrokeShape(radius, fillColor, selectorWidth, Color.WHITE)
-            colorSelectorContainer.background = if (isChecked) ShapeUtils.getRadiusShape(
+                ShapeUtils.getRadiusStrokeShape(
+                    radius,
+                    fillColor,
+                    1.dp2Px(),
+                    ContextCompat.getColor(context, R.color.gray_60)
+                )
+            colorSelectorContainer.background = if (isChecked) ShapeUtils.getRadiusStrokeShape(
                 radius,
-                selectorColor
+                Color.WHITE, selectorWidth, selectorColor
             ) else ContextCompat.getDrawable(context, android.R.color.transparent)
         }
     }

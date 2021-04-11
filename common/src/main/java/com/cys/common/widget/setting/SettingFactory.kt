@@ -20,15 +20,15 @@ class SettingFactory {
     val itemProducts = linkedMapOf<Int, SettingItem>()
     var noticeIndex = -1
     var title: String = ""
-    var divider: Boolean = false
 
     @ColorInt
     var themeColor = Colors.BLUE
 
     data class SettingItem(
+        val id: Int,
         val type: SettingItemType,
-        val key: String,
         val title: String,
+        val key: String = "",
         var summary: String = "",
 
         val switchChecked: Boolean = false,
@@ -47,38 +47,80 @@ class SettingFactory {
         val color: Int = Colors.WHITE,
 
         val groupDivider: Boolean = true
-    )
+    ) {
+        override fun equals(other: Any?): Boolean {
+            if (this === other) return true
+            if (other !is SettingItem) return false
 
-    fun addGroupTitle(title: String, groupDivider: Boolean = true) : SettingFactory{
+            if (id != other.id) return false
+            if (type != other.type) return false
+            if (title != other.title) return false
+            if (key != other.key) return false
+            if (summary != other.summary) return false
+            if (switchChecked != other.switchChecked) return false
+            if (chooseItems != other.chooseItems) return false
+            if (chooseDefault != other.chooseDefault) return false
+            if (sliderFrom != other.sliderFrom) return false
+            if (sliderTo != other.sliderTo) return false
+            if (sliderDefault != other.sliderDefault) return false
+            if (sliderScale != other.sliderScale) return false
+            if (showEntranceIcon != other.showEntranceIcon) return false
+            if (color != other.color) return false
+            if (groupDivider != other.groupDivider) return false
+
+            return true
+        }
+
+        override fun hashCode(): Int {
+            var result = id
+            result = 31 * result + type
+            result = 31 * result + title.hashCode()
+            result = 31 * result + key.hashCode()
+            result = 31 * result + summary.hashCode()
+            result = 31 * result + switchChecked.hashCode()
+            result = 31 * result + chooseItems.hashCode()
+            result = 31 * result + chooseDefault.hashCode()
+            result = 31 * result + sliderFrom.hashCode()
+            result = 31 * result + sliderTo.hashCode()
+            result = 31 * result + sliderDefault.hashCode()
+            result = 31 * result + sliderScale
+            result = 31 * result + showEntranceIcon.hashCode()
+            result = 31 * result + color
+            result = 31 * result + groupDivider.hashCode()
+            return result
+        }
+    }
+
+    fun addGroupTitle(id: Int, title: String, groupDivider: Boolean = true): SettingFactory {
         itemProducts[itemProducts.size] = SettingItem(
-            SETTING_GROUP_TITLE,
-            UUID.randomUUID().toString(), title, groupDivider = groupDivider
+            id, SETTING_GROUP_TITLE,
+            title, groupDivider = groupDivider
         )
         return this
     }
 
     fun addSwitch(
-        key: String,
+        id: Int,
         title: String,
         checked: Boolean,
+        key: String = "",
         summary: String = ""
     ): SettingFactory {
         itemProducts[itemProducts.size] = SettingItem(
-            SETTING_SWITCH,
-            key, title, summary, checked
+            id, SETTING_SWITCH, title, key, summary, checked
         )
         return this
     }
 
     fun addChoose(
-        key: String,
+        id: Int,
         title: String,
         items: ArrayList<String>,
-        default: String
+        default: String,
+        key: String = ""
     ): SettingFactory {
         itemProducts[itemProducts.size] = SettingItem(
-            SETTING_CHOOSE,
-            key, title,
+            id, SETTING_CHOOSE, title, key,
             chooseItems = items,
             chooseDefault = default
         )
@@ -86,16 +128,17 @@ class SettingFactory {
     }
 
     fun addSlider(
-        key: String,
+        id: Int,
         title: String,
         from: Float,
         to: Float,
         default: Float,
-        scale: Int = 0
+        scale: Int = 0,
+        key: String = ""
     ): SettingFactory {
         itemProducts[itemProducts.size] = SettingItem(
-            SETTING_SLIDER,
-            key, title,
+            id, SETTING_SLIDER,
+            title, key,
             sliderFrom = from,
             sliderTo = to,
             sliderDefault = default,
@@ -104,33 +147,35 @@ class SettingFactory {
         return this
     }
 
-    fun addEntrance(title: String, factory: SettingFactory, showIcon: Boolean = true) {
+    fun addEntrance(id: Int, title: String, factory: SettingFactory?, showIcon: Boolean = true) {
         itemProducts[itemProducts.size] = SettingItem(
-            SETTING_ENTRANCE, UUID.randomUUID().toString(), title,
+            id, SETTING_ENTRANCE, title,
             entrance = factory, showEntranceIcon = showIcon
         )
     }
 
     fun addColorPicker(
-        key: String,
+        id: Int,
         title: String,
-        default: Int
+        default: Int,
+        key: String = ""
     ): SettingFactory {
         itemProducts[itemProducts.size] = SettingItem(
-            SETTING_COLOR,
-            key, title, color = default
+            id, SETTING_COLOR,
+            title, key, color = default
         )
         return this
     }
 
     fun addTextInput(
-        key: String,
+        id: Int,
         title: String,
-        default: String
+        default: String,
+        key: String = ""
     ): SettingFactory {
         itemProducts[itemProducts.size] = SettingItem(
-            SETTING_INPUT,
-            key, title, summary = default
+            id, SETTING_INPUT,
+            title, key, summary = default
         )
         return this
     }
